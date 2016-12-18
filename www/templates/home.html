@@ -1,0 +1,137 @@
+<ion-view view-title="Live offers">
+  <ion-content padding="true">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <a class="item item-thumbnail-right" ng-repeat="activeOffer in activeOffers"
+         ng-href="#/app/offers/{{activeOffer.offer.id}}">
+        <img ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}">
+        <!--div class="item item-avatar" width="75%" height="100%">
+          <img ng-src="{{siteRoot}}/upload/assets/img/localbusiness/{{activeOffer.localBusiness.logo}}"
+               style="height: 25px;">
+        </div-->
+        <h2 style="color: #8f8f8f"><i class="icon ion-ios-pricetag dark"></i> {{activeOffer.localBusiness.label}}</h2>
+        <!--p>{{activeOffer.localBusiness.description}}</p-->
+        <h4 style="color: #8f8f8f">{{activeOffer.offer.title}}</h4>
+        <!--p>{{activeOffer.offer.description}}</p-->
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Absolute'">
+          {{activeOffer.offer.promotionSecondParam}} DTN <strike
+          class="assertive">{{activeOffer.offer.promotionFirstParam}} DTN</strike>
+        </h3>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Gift'">
+          {{activeOffer.offer.promotionFirstParam}} <i class="icon ion-android-done dark"></i>{{activeOffer.offer.promotionSecondParam}}
+        </h3>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Relative'">
+          {{activeOffer.offer.promotionFirstParam}} % discount
+        </h3>
+        <h4 class="dark pull right"><i class="icon ion-clock"></i>&nbsp;{{activeOffer.time.days}}<sub>days</sub>&nbsp;{{activeOffer.time.hours}}<sub>hours</sub>&nbsp;{{activeOffer.time.minutes}}<sub>minutes</sub>
+        </h4>
+      </a>
+    </ion-list>
+
+    <!--ion-list>
+      <a ng-repeat="activeOffer in activeOffers"
+         ng-href="#/app/offers/{{activeOffer.offer.id}}">
+        <div class="row">
+          <div class="col col-60">
+            <div class="item item-avatar">
+              <img ng-src="{{siteRoot}}/upload/assets/img/localbusiness/{{activeOffer.localBusiness.logo}}"/>
+              <h3>{{activeOffer.localBusiness.label}}</h3>
+            </div>
+            <p>{{activeOffer.offer.title}}</p>
+            <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Absolute'">
+              {{activeOffer.offer.promotionSecondParam}} DTN <strike
+              class="assertive">{{activeOffer.offer.promotionFirstParam}}
+              DTN</strike>
+            </h3>
+            <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Gift'">
+              {{activeOffer.offer.promotionFirstParam}} <i class="icon ion-android-done dark"></i>{{activeOffer.offer.promotionSecondParam}}
+            </h3>
+            <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Relative'">
+              {{activeOffer.offer.promotionFirstParam}} % discount
+            </h3>
+            <h4 class="dark pull right"><i class="icon ion-clock"></i>&nbsp;{{activeOffer.time.days}}<sub>days</sub>&nbsp;{{activeOffer.time.hours}}<sub>hours</sub>&nbsp;{{activeOffer.time.minutes}}<sub>minutes</sub>
+            </h4>
+          </div>
+
+          <div class="col col-40">
+            <div class="item item-body">
+              <img class="full-image"
+                   ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}">
+            </div>
+          </div>
+
+        </div>
+        </div>
+      </a>
+    </ion-list-->
+
+    <!--div class="list card">
+      <div class="item item-body" style="padding: 0px;">
+        <div class="row" style="padding: 0px;">
+          <div class="col col-75" style="padding: 0px;">
+            <div class="item item-avatar" style="padding: 0px;">
+              <img id="logo" ng-src="img/picture.png"  style="height: 30%; width: 20%; margin: 0px;">
+              <h3 class="royal" style="margin-left: 20%;">Taha Voyages</h3>
+              <p class="pull-right calm" style="margin-right: 0%; margin-left: 80%; margin-top: 0%;">Shopping</p>
+              <h2 class="positive" style="margin-left: 10px;">Une monture et une branche</h2>
+              <p>Branche : Imprimé Glassing</p>
+    </div-->
+
+
+    <!--/div>
+    <div class="col col-25" style="padding: 0px;">
+      <a ui-sref="tabsController.cartTabDefaultPage" style="padding: 0px;">
+        <img ng-src="img/picture.png" style="width: 100%; width: 100%; margin: 0px;">
+      </a>
+    </div>
+  </div>
+</div>
+</div-->
+
+    <!--ion-list>
+      <ion-item class="item-remove-animate item-avatar-right" ng-repeat="activeOffer in activeOffers"
+                type="item-text-wrap">
+        <img ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}">
+        <img src="{{siteRoot}}/upload/assets/img/localbusiness/{{activeOffer.localBusiness.logo}}" style="float:left;width: 15px;height: 15px;"  class="item-avatar">
+        <h2>{{activeOffer.localBusiness.label}}</h2>
+
+        <p>{{activeOffer.offer.title}}</p>
+        <div class="row">
+          <p>{{activeOffer.offer.description}}</p>
+        </div>
+        <div class="welcome-custom-icon"><span class="ti-angle-right"></span></div>
+      </ion-item>
+    </ion-list-->
+
+    <!--div class="list card" ng-repeat="activeOffer in activeOffers">
+      <div class="item item-avatar" width="75%" height="100%">
+        <img ng-src="{{siteRoot}}/upload/assets/img/localbusiness/{{activeOffer.localBusiness.logo}}">
+        <h2>{{activeOffer.localBusiness.label}}</h2>
+        <p>{{activeOffer.localBusiness.description}}</p>
+      </div>
+      <img ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}" width="25%"
+           height="100%">
+
+    </div-->
+
+    <!--div class="item item-avatar">
+      <img ng-src="{{siteRoot}}/upload/assets/img/localbusiness/{{activeOffer.localBusiness.logo}}">
+      <h2>{{activeOffer.localBusiness.label}}</h2>
+      <p>{{activeOffer.localBusiness.category.name}}</p>
+    </div>
+
+    <div class="item item-thumbnail-right">
+      <img class="full-image" ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}">
+      <h2>{{activeOffer.offer.title}}</h2>
+      <p>{{activeOffer.offer.description | limitTo:100}}</p-->
+    <!--p>
+      <a href="#" class="subdued">1 Like</a>
+      <a href="#" class="subdued">5 Comments</a>
+    </p-->
+    </div>
+    </div>
+  </ion-content>
+</ion-view>

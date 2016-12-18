@@ -1,0 +1,24 @@
+  <ion-view view-title="My reservations">
+  <ion-content>
+    <ion-list>
+      <a class="item item-thumbnail-right" ng-repeat="activeOffer in activeOffers"
+         ng-href="#/app/offers/{{activeOffer.offer.id}}">
+        <img ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}">
+        <h2 style="color: #8f8f8f"><i class="icon ion-ios-pricetag dark"></i> {{activeOffer.localBusiness.label}}</h2>
+        <h4 style="color: #8f8f8f">{{activeOffer.offer.title}}</h4>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Absolute'">
+          <i class="icon ion-thumbsup balanced"></i> {{activeOffer.offer.promotionSecondParam}} DTN <strike
+          class="assertive"><i class="icon ion-thumbsdown assertive"></i> {{activeOffer.offer.promotionFirstParam}} DTN</strike>
+        </h3>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Gift'">
+          {{activeOffer.offer.promotionFirstParam}} <i class="icon ion-android-done dark"></i>{{activeOffer.offer.promotionSecondParam}}
+        </h3>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Relative'">
+          {{activeOffer.offer.promotionFirstParam}} % discount
+        </h3>
+        <h4 class="dark pull right"><i class="icon ion-clock"></i>&nbsp;{{activeOffer.time.days}}<sub>days</sub>&nbsp;{{activeOffer.time.hours}}<sub>hours</sub>&nbsp;{{activeOffer.time.minutes}}<sub>minutes</sub>
+        </h4>
+      </a>
+    </ion-list>
+  </ion-content>
+</ion-view>

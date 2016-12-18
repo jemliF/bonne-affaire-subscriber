@@ -1,0 +1,56 @@
+<ion-view view-title="Profile" align-title="left">
+  <ion-content padding="true">
+    <div class="item item-thumbnail-right">
+      <img class="img-circle" src="{{siteRoot}}/upload/assets/img/subscriber/{{subscriber.photo}}">
+      <h2 class="title dark">{{subscriber.firstname}}&nbsp;{{subscriber.lastname}}</h2>
+    </div>
+    <div class="list">
+      <div class="item item-icon-left dark">
+        <i class="icon ion-person"></i>
+        Gender
+        <span class="item-note">
+          <p ng-show="subscriber.gender">Male</p>
+          <p ng-hide="subscriber.gender">Female</p>
+        </span>
+      </div>
+      <div class="item item-icon-left dark">
+        <i class="icon ion-calendar"></i>
+        Birthdate
+        <span class="item-note">
+         <p> {{subscriber.birthdate | date: 'MM/dd/yyyy'}}</p>
+        </span>
+      </div>
+      <div class="item item-icon-left dark">
+        <i class="icon ion-email"></i>
+        Email
+        <span class="item-note">
+         <p> {{subscriber.email}}</p>
+        </span>
+      </div>
+      <div class="item item-icon-left dark">
+        <i class="icon ion-android-phone-portrait"></i>
+        Phone
+        <span class="item-note">
+         <p> {{subscriber.phone}}</p>
+        </span>
+      </div>
+      <!--div class="item item-icon-left dark">
+        <i class="icon ion-location"></i>
+        Address
+        <span class="item-note">
+         <p> {{subscriber.address}}</p>
+        </span>
+      </div-->
+
+      <div class="item item-icon-left  dark">
+        <i class="icon ion-location"></i>
+        Address
+      </div>
+      <div class="item item-body  dark">
+        <p>{{subscriber.address}}</p>
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>

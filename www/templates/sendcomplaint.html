@@ -1,0 +1,28 @@
+<ion-view view-title="Complaint" align-title="left">
+  <ion-content padding="true">
+
+
+    <ion-toggle ng-model="complaint.isOfferReceived" toggle-class="toggle-dark"
+                ng-change="complaint.isDescriptionComplaint = !complaint.isOfferReceived">Offer was not received?
+    </ion-toggle>
+    <br>
+    <ion-toggle ng-model="complaint.isDescriptionComplaint"
+                ng-change="complaint.isOfferReceived = !complaint.isDescriptionComplaint"
+                toggle-class="toggle-dark">Mismatch received/description?
+    </ion-toggle>
+    <br>
+    <label class="item item-input">
+      <textarea ng-model="complaint.comment" rows="6" class="block" placeholder="You can explain more here..."></textarea>
+    </label>
+    <br>
+    <button class="button button-block button-balanced" ng-click="send()"
+            ng-disabled="complaint.isDescriptionComplaint == false && complaint.isOfferReceived==false || complaint.comment.length==0">
+      Send
+    </button>
+
+    <!--ion-list>
+      <ion-checkbox ng-model="complaint.isOfferReceived">Was the announced offer received</ion-checkbox>
+      <ion-checkbox ng-model="complaint.isDescriptionComplaint">Was the received product the same as in the offer</ion-checkbox>
+    </ion-list-->
+  </ion-content>
+</ion-view>

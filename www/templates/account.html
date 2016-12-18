@@ -1,0 +1,154 @@
+<ion-view view-title="My space" align-title="center">
+  <ion-content padding="true">
+    <div class="item item-thumbnail-right">
+      <img class="img-circle" ng-src="{{siteRoot}}/upload/assets/img/subscriber/{{user.photo}}">
+      <h2 class="title dark">{{user.firstname}}&nbsp;{{user.lastname}}</h2>
+    </div>
+    <br>
+    <div class="list">
+      <form name="frm" id="frm">
+        <div class="item item-divider item-icon-right dark">
+          <i class="icon ion-information"></i>
+          Basic informations
+        </div>
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-person"></i></span>
+          <input type="text" placeholder="First name" required ng-model="user.firstname" ng-minlength="3"
+                 name="firstname">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.firstname.$dirty && (frm.firstname.$error.required || frm.firstname.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-person"></i></span>
+          <input type="text" placeholder="Last name" ng-model="user.lastname" required ng-minlength="3" name="lastname">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.lastname.$dirty && (frm.lastname.$error.required || frm.lastname.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <!--label class="item item-input item-select">
+          <span class="input-label" style="width: auto;"><i class="icon ion-person"></i></span>
+         <select ng-options="gender as gender.label for gender in genders" ng-model="user.gender" name="gender"
+          required></select>
+        <span class="input-label" style="width: auto;" ng-show="frm.gender.$dirty && frm.lastname.$error.required"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label-->
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-location"></i></span>
+          <textarea type="text" placeholder="Address..." ng-model="user.address" required
+                    name="address"></textarea>
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.address.$dirty && frm.address.$error.required"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <label class="item item-input" ng-click="openDatePicker()"><!--  -->
+        <span class="input-label" style="width: auto;"><i
+          class="icon ion-calendar"></i></span>
+          <div class="title">{{user.birthdate | date: 'MM/dd/yyyy'}}</div>
+        <span class="input-label" style="width: auto;" ng-show="submit && !user.birthdate"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-android-phone-portrait"></i></span>
+          <input type="tel" placeholder="Phone number" ng-model="user.phone" required name="phone" ng-minlength="8">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.phone.$dirty && (frm.phone.$error.required || frm.phone.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-email"></i></span>
+          <input type="email" placeholder="Email" required ng-model="user.email" name="email">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.email.$dirty && (frm.email.$error.required || frm.email.$error.email)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <!--button class="button button-clear button-dark button-block" ng-click="modal.show()"><i class="icon ion-locked"></i>&nbsp;Change password
+        </button-->
+        <button class="button button-balanced button-block" ng-click="update()"
+                ng-disabled="frm.$invalid">
+          Update profile
+        </button>
+      </form>
+    </div>
+
+    <div class="item item-divider item-icon-right dark">
+      <i class="icon ion-locked"></i>
+      Change your password
+    </div>
+    <div class="list">
+      <form name="frm2">
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-locked"></i></span>
+          <input type="password" placeholder="Old password" ng-model="passwordChange.oldPassword" required
+                 name="oldPassword">
+            <span class="input-label" style="width: auto;"
+                  ng-show="frm2.oldPassword.$dirty && frm2.oldPassword.$error.required"><i
+              class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-locked"></i></span>
+          <input type="password" placeholder="Your new password" ng-model="passwordChange.newPassword" required
+                 ng-minlength="5" nama="newPassword">
+            <span class="input-label" style="width: auto;"
+                  ng-show="frm2.newPassword.$dirty && (frm2.newPassword.$error.required || frm2.newPassword.$error.minlength)"><i
+              class="icon ion-android-alert assertive"></i></span>
+        </label>
+        <label class="item item-input">
+          <span class="input-label" style="width: auto;"><i class="icon ion-locked"></i></span>
+          <input type="password" placeholder="Password confirmation" ng-model="passwordChange.newPasswordConfirm"
+                 required ng-minlength="5" name="newPasswordConfirm">
+            <span class="input-label" style="width: auto;"
+                  ng-show="(frm2.newPasswordConfirm.$dirty && frm2.newPasswordConfirm.$error.required) || passwordChange.newPassword !== passwordChange.newPasswordConfirm"><i
+              class="icon ion-android-alert assertive"></i></span>
+        </label>
+
+        <button class="button button-balanced button-block" ng-click="updatePassword()"
+                ng-disabled="frm2.$invalid">
+          Update password
+        </button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="changepassword.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Change your password</h1>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list">
+        <form name="frm2">
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Your actual password</span>
+            <input type="password" placeholder="Old password" ng-model="passwordChange.oldPassword" required
+                   name="oldPassword">
+            <span class="input-label" style="width: auto;"
+                  ng-show="frm2.oldPassword.$dirty && frm2.oldPassword.$error.required"><i
+              class="icon ion-android-alert assertive"></i></span>
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Your new password</span>
+            <input type="password" placeholder="Your new password" ng-model="passwordChange.newPassword" required
+                   ng-minlength="5" nama="newPassword">
+            <span class="input-label" style="width: auto;"
+                  ng-show="frm2.newPassword.$dirty && (frm2.newPassword.$error.required || frm2.newPassword.$error.minlength)"><i
+              class="icon ion-android-alert assertive"></i></span>
+          </label>
+          <label class="item item-input item-floating-label">
+            <span class="input-label">Password confirmation</span>
+            <input type="password" placeholder="Password confirmation" ng-model="passwordChange.newPasswordConfirm"
+                   required ng-minlength="5" name="newPasswordConfirm">
+            <span class="input-label" style="width: auto;"
+                  ng-show="(frm2.newPasswordConfirm.$dirty && frm2.newPasswordConfirm.$error.required) || passwordChange.newPassword !== passwordChange.newPasswordConfirm"><i
+              class="icon ion-android-alert assertive"></i></span>
+          </label>
+          <button class="button button-balanced button-block" ng-click="changePassword()"
+                  ng-disabled="frm2.$invalid">
+            Submit
+          </button>
+        </form>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

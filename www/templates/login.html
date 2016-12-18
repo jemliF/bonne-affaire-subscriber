@@ -1,0 +1,55 @@
+<ion-view view-title="Login" align-title="left">
+  <ion-content padding="true" style="background: #F3F3F3;"><!--   -->
+    <div class="item item-body item-borderless" style="background: #F3F3F3;">
+      <img class="full-image" src="img/logo.png">
+    </div>
+    <br>
+    <div class="list">
+      <form name="frm">
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-email"></i></span>
+          <input type="email" placeholder="Email" required ng-model="email" name="email">
+        <span class="input-label" style="width: auto;" ng-show="frm.email.$dirty && frm.email.$error.required"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-locked"></i></span>
+          <input type="password" placeholder="Password" required ng-model="password" name="password">
+        <span class="input-label" style="width: auto;" ng-show="frm.password.$dirty && frm.password.$error.required"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <button class="button button-balanced button-block " ng-click="login(email, password)">
+          <i class="icon light ion-log-in"></i> LOGIN
+        </button>
+        <button class="button button-positive button-block " ng-click="facebookLogin()">
+          <i class="icon light ion-social-facebook"></i> Sign in with Facebook
+        </button>
+        <button class="button button-assertive button-block ">
+          <i class="icon ion-social-googleplus"></i> Sign in with Google+
+        </button>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col col-40">
+        <button class="button button-clear button-positive animated pulse" ui-sref="register">
+          Sign up
+        </button>
+      </div>
+      <div class="col col-60">
+        <button class="button button-clear button-positive animated pulse" ui-sref="forgotpassword">
+          Forgot password
+        </button>
+      </div>
+    </div>
+
+    <!--div class="button-bar">
+      <button class="button button-clear button-positive animated pulse" ui-sref="register">
+        Sign up
+      </button>
+      <button class="button button-clear button-positive animated pulse">
+        Forgot password
+      </button>
+    </div-->
+  </ion-content>
+</ion-view>

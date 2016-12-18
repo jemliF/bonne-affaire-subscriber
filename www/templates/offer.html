@@ -1,0 +1,157 @@
+<ion-view view-title="Offer details">
+  <ion-content padding="true">
+    <a class="item item-avatar item-borderless" ng-href="#/app/companies/{{activeOffer.localBusiness.id}}">
+      <img ng-src="{{siteRoot}}/upload/assets/img/localbusiness/{{activeOffer.localBusiness.logo}}">
+      <h2 style="color: #8f8f8f">{{activeOffer.localBusiness.label}}</h2>
+      <h4 class="positive">{{activeOffer.localBusiness.category.name}}</h4>
+    </a>
+    <span class="light-bg title" style="color: #8f8f8f">
+      {{activeOffer.offer.title}}
+    </span>
+
+    <div class="item item-body item-borderless">
+      <ion-gallery ng-if="mediaSupports" ion-gallery-items="mediaSupports"></ion-gallery>
+
+
+      <h3 class="balanced block" ng-show="activeOffer.offer.promotionType=='Absolute'">
+        <i class="icon ion-thumbsup balanced"></i> {{activeOffer.offer.promotionSecondParam}} DTN <strike
+        class="assertive"><i class="icon ion-thumbsdown assertive"></i> {{activeOffer.offer.promotionFirstParam}}
+        DTN</strike>
+      </h3>
+      <h3 class="balanced block" ng-show="activeOffer.offer.promotionType=='Gift'">
+        {{activeOffer.offer.promotionFirstParam}} <i class="icon ion-android-done dark"></i>{{activeOffer.offer.promotionSecondParam}}
+      </h3>
+      <h3 class="balanced block" ng-show="activeOffer.offer.promotionType=='Relative'">
+        {{activeOffer.offer.promotionFirstParam}} % discount
+      </h3>
+      <p>{{activeOffer.offer.description}}</p>
+    </div>
+    <div class="row light-bg responsive-sm">
+      <h4 class="dark">
+        <i class="icon ion-location"></i>&nbsp;
+        {{activeOffer.localBusiness.address}}
+      </h4>
+    </div>
+    <div class="row stable-bg responsive-sm">
+      <div class="col col-60"><p class="positive"><i class="icon ion-bag"></i>&nbsp;{{reservationsCount}}&nbsp;reservations&nbsp;/&nbsp;{{activeOffer.offer.maxReservationNumber}}
+      </p>
+      </div>
+      <div class="col col-40"><p class="positive"><i class="icon ion-eye"></i>&nbsp;{{activeOffer.offer.viewsNumber}}&nbsp;views</i>
+      </p></div>
+    </div>
+    <div class="row stable-bg">
+      <div class="col col-60"><p class="assertive"><i class="icon ion-clock"></i>&nbsp;{{activeOffer.time.days}}<sub>days</sub>&nbsp;{{activeOffer.time.hours}}<sub>hours</sub>&nbsp;{{activeOffer.time.minutes}}<sub>minutes</sub>
+      </p></div>
+      <div class="col col-40"><h4></h4></div>
+    </div>
+
+    <!-- reservation status -->
+    <div class="item item-icon-left" ng-show="reservation.status">
+      <h4 class="assertive" ng-show="reservation.status =='pending'"><i class="icon ion-alert"></i>&nbsp;Pending reservation</h4>
+      <h4 class="balanced" ng-show="reservation.status =='confirmed'"><i
+        class="icon ion-checkmark-round"></i>&nbsp;Confirmed reservation</h4>
+    </div>
+    <!-- Your feedback -->
+    <div class="item item-avatar" ng-if="feedback.id">
+      <img ng-src="{{siteRoot}}/upload/assets/img/subscriber/{{subscriber.photo}}"/>
+      <div class="timeline-item">
+        <h4>{{subscriber.firstname}}&nbsp;{{subscriber.lastname}}</h4>
+        <p>{{feedback.comment}}</p>
+         <span class="pull-right"><p class="h5"><i class="icon ion-ios-calendar"></i> {{feedback.sentDate| date:
+           'MM/dd/yyyy'}}</p></span>
+      </div>
+    </div>
+    <!-- Your rating -->
+    <ionic-ratings ratingsobj='ratingsObject' class="block animated bounce"
+                   ng-show="reserved && reservation.status =='confirmed'"
+                   ng-model="ratingsObject.rating"
+                   ng-if="ratingsObject"></ionic-ratings>
+
+    <button class="button button-balanced button-block" ng-if="!reserved && status=='Active'" ng-click="takeOffer()">
+      Take offer
+    </button>
+    <button class="button button-balanced button-block" ng-click="modal.show()" ng-if="reserved">
+      Show voucher
+    </button>
+
+    <button class="button button-positive button-block" ng-click="showPopup()"
+            ng-if="reservation.status =='confirmed'" ng-hide="feedback.comment">
+      Send feedback
+    </button>
+    <button class="button button-energized button-block" ng-click="cancelReservation()"
+            ng-if="reserved && reservation.status =='pending'">
+      Cancel reservation
+    </button>
+    <button class="button button-assertive button-block" ng-if="reservation.status =='confirmed'"
+            ng-click="sendComplaint()">
+      Send complaint
+    </button>
+
+    <!-- offer feedbacks -->
+    <div class="list" scroll="true">
+      <div class="item item-divider item-icon-right dark">
+        <i class="icon ion-chatbubble-working"></i>
+        Feedbacks
+        <p ng-show="!feedbacks.length>0">No feedbacks yet</p>
+      </div>
+      <div class="item item-avatar" ng-repeat="feedback in feedbacks">
+        <img ng-src="{{siteRoot}}/upload/assets/img/subscriber/{{feedback.subscriber.photo}}">
+        <h2>{{feedback.subscriber.firstname}}&nbsp;{{feedback.subscriber.lastname}}</h2>
+        <p>{{feedback.comment}}</p>
+        <span class="pull-right"><p class="h5"><i class="icon ion-ios-calendar"></i> {{feedback.sentDate| date:
+          'MM/dd/yyyy'}}</p></span>
+      </div>
+      <div class="item item-divider item-icon-right dark">
+        <i class="icon ion-star"></i>
+        Ratings
+        <p ng-show="!ratings.length>0">No ratings yet</p>
+      </div>
+      <div class="item item-avatar" ng-repeat="rateObj in ratings">
+        <img ng-src="{{siteRoot}}/upload/assets/img/subscriber/{{rateObj.rating.subscriber.photo}}">
+        <h2>{{rateObj.rating.subscriber.firstname}}&nbsp;{{rateObj.rating.subscriber.lastname}}</h2>
+        <i class="icon ion-star dark animated bounceIn" ng-repeat="star in rateObj.stars"></i>&nbsp;
+        <span class="pull-right"><p class="h5"><i class="icon ion-ios-calendar"></i> {{rateObj.rating.sentDate| date:
+          'MM/dd/yyyy'}}</p></span>
+      </div>
+    </div>
+
+    <!-- offer ratings -->
+    <div class="list" scroll="true">
+
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="voucher.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-dark">
+      <h1 class="title">Your reservation voucher</h1>
+      <button class="button button-small button-light" ng-click="modal.hide()">Close</button>
+    </ion-header-bar>
+    <ion-content>
+      <div class="item item-body full-image">
+        <qrcode data="{{reservation.id}}" download size="200" error-correction-level="H"></qrcode>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+
+<!--script id="feedback.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-dark">
+      <h1 class="title">Your feedback</h1>
+      <button class="button button-small button-light">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+      <div class="item item-body item-input">
+        <textarea rows="5" ng-model="comment" placeholder="Your feedback please..."></textarea>
+      </div>
+      <div class="button-bar">
+        <button class="button button-block button-assertive" ng-click="cancelFeedback()">Cancel</button>
+        <button class="button button-block button-balanced" ng-click="sendFeedback()" ng-disabled="comment">Send
+        </button>
+      </div>
+
+    </ion-content>
+  </ion-modal-view>
+</script-->

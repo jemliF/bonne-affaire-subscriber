@@ -1,0 +1,107 @@
+<ion-view view-title="Create an account" align-title="left">
+  <ion-content padding="true" style="background: #F3F3F3;" scroll="true"><!--   -->
+    <div class="item item-body item-borderless" style="background: #F3F3F3;">
+      <img class="full-image" src="img/logo.png">
+    </div>
+    <br>
+    <div class="list">
+      <form name="frm" id="frm">
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-person"></i></span>
+          <input type="text" placeholder="First name" required ng-model="user.firstname" ng-minlength="3"
+                 name="firstname">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.firstname.$dirty && (frm.firstname.$error.required || frm.firstname.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-person"></i></span>
+          <input type="text" placeholder="Last name" ng-model="user.lastname" required ng-minlength="3" name="lastname">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.lastname.$dirty && (frm.lastname.$error.required || frm.lastname.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input item-select ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-person"></i></span>
+          <!--select required ng-model="user.gender" name="gender" class="pull-left">
+            <option value="true" selected> Male</option>
+            <option value="false"> Female</option>
+          </select-->
+          <select ng-options="gender as gender.label for gender in genders" ng-model="user.gender" name="gender"
+                  required></select>
+        <span class="input-label" style="width: auto;" ng-show="frm.gender.$dirty && frm.gender.$error.required"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-location"></i></span>
+          <textarea type="text" placeholder="Address..." ng-model="user.address" required
+                    name="address"></textarea>
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.address.$dirty && (frm.address.$error.required || frm.address.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input " ng-click="openDatePicker()"><!--  -->
+        <span class="input-label" style="width: auto;"><i
+          class="icon ion-calendar"></i></span>
+          <div class="pull-left">{{user.birthdate | date: 'MM/dd/yyyy'}}</div>
+        <span class="input-label" style="width: auto;" ng-show="submit && !user.birthdate"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-android-phone-portrait"></i></span>
+          <input type="tel" placeholder="Phone number" ng-model="user.phone" required name="phone" ng-minlength="8">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.phone.$dirty && (frm.phone.$error.required || frm.phone.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-email"></i></span>
+          <input type="email" placeholder="Email" required ng-model="user.email" name="email">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.email.$dirty && (frm.email.$error.required || frm.email.$error.email)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-locked"></i></span>
+          <input type="password" placeholder="Password" required ng-model="user.password" name="password"
+                 ng-minlength="5">
+        <span class="input-label" style="width: auto;"
+              ng-show="frm.password.$dirty && (frm.password.$error.required || frm.password.$error.minlength)"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label><br>
+        <label class="item item-input ">
+          <span class="input-label" style="width: auto;"><i class="icon ion-locked"></i></span>
+          <input type="password" placeholder="Retype password" required ng-model="retypePassword" name="retypePassword"
+                 ng-minlength="5">
+        <span class="input-label" style="width: auto;"
+              ng-show="(frm.retypePassword.$dirty && frm.retypePassword.$error.required) || user.password !== retypePassword"><i
+          class="icon ion-android-alert assertive"></i></span>
+        </label>
+
+      </form>
+    </div>
+    <!--onezone-datepicker datepicker-object="onezoneDatepicker">
+      <button class="button button-block button-outline button-positive show-onezone-datepicker">
+        {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}
+      </button>
+    </onezone-datepicker>
+    <div class="padding">
+      <button class="button button-block button-outline button-positive" ng-click="showDatepicker()">
+        Show datepicker
+      </button>
+    </div-->
+  </ion-content>
+  <ion-footer-bar class="bar-light">
+
+    <div class="button-bar">
+      <button class="button button-balanced button-cover" ng-click="register(user)"
+              ng-disabled="frm.$invalid">
+        SIGN UP
+      </button>
+      <!--button class="button button-calm" ui-sref="login"
+              style="text-decoration: underline;">
+        LOGIN
+      </button-->
+    </div>
+  </ion-footer-bar>
+</ion-view>

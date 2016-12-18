@@ -1,0 +1,122 @@
+<ion-view view-title="{{company.label}}">
+  <ion-content padding="true">
+    <div class="item item-thumbnail-right" href="">
+      <img class="img-circle" src="{{siteRoot}}/upload/assets/img/localbusiness/{{company.logo}}">
+      <h2 class="title dark">{{company.label}}</h2>
+      <h4 class="dark">{{company.category.name}}</h4>
+    </div>
+    <br>
+    <div class="item item-divider item-icon-right dark">
+      <i class="icon ion-information"></i>
+      Basic informations
+    </div>
+    <div class="list">
+
+      <div class="item item-icon-left dark">
+        <i class="icon ion-email"></i>
+        Email
+        <span class="item-note">
+          <p>{{company.email}}</p>
+        </span>
+      </div>
+
+      <!--div class="item item-icon-left dark">
+        <i class="icon ion-location"></i>
+        Address
+        <span class="item-note">
+          <p>{{company.address}}</p>
+        </span>
+      </div-->
+
+      <div class="item item-icon-left  dark">
+        <i class="icon ion-location"></i>
+        Address
+      </div>
+      <div class="item item-body  dark">
+        <p>{{company.address}}</p>
+      </div>
+
+      <div class="item item-icon-left dark">
+        <i class="icon ion-android-call"></i>
+        Landline
+        <span class="item-note">
+          <p>{{company.landline}}</p>
+        </span>
+      </div>
+
+      <div class="item item-icon-left dark">
+        <i class="icon ion-earth"></i>
+        Website
+        <span class="item-note">
+          <p>{{company.website}}</p>
+        </span>
+      </div>
+
+      <!--div class="item item-icon-left dark">
+        <i class="icon ion-android-list"></i>
+        Schedule
+        <span class="item-note">
+          <p>{{company.schedule}}</p>
+        </span>
+      </div-->
+
+      <div class="item item-icon-left  dark">
+        <i class="icon ion-android-list"></i>
+        Schedule
+      </div>
+      <div class="item item-body  dark">
+        <p>{{company.schedule}}</p>
+      </div>
+
+    </div>
+
+    <!-- Your rating -->
+    <ionic-ratings ratingsobj='ratingsObject' class="block animated bounce"
+                   ng-show="isClient"
+                   ng-model="ratingsObject.rating"
+                   ng-if="ratingsObject"></ionic-ratings>
+
+    <div class="item item-divider item-icon-right dark">
+      <i class="icon ion-ios-pulse-strong"></i>
+      Company's live offers
+    </div>
+    <br>
+    <ion-list>
+      <a class="item item-thumbnail-right" ng-repeat="activeOffer in activeOffers"
+         ng-href="#/app/offers/{{activeOffer.offer.id}}">
+        <img ng-src="{{siteRoot}}/upload/assets/img/media-support/{{activeOffer.mediaSupport.fileName}}">
+
+        <p class="h3">{{activeOffer.offer.title}}</p>
+
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Absolute'">
+          <i class="icon ion-thumbsup balanced"></i> {{activeOffer.offer.promotionSecondParam}} DTN <strike
+          class="assertive"><i class="icon ion-thumbsdown assertive"></i> {{activeOffer.offer.promotionFirstParam}} DTN</strike>
+        </h3>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Gift'">
+          {{activeOffer.offer.promotionFirstParam}} <i class="icon ion-android-done dark"></i>{{activeOffer.offer.promotionSecondParam}}
+        </h3>
+        <h3 class="balanced" ng-show="activeOffer.offer.promotionType=='Relative'">
+          {{activeOffer.offer.promotionFirstParam}} % discount
+        </h3>
+        <h4 class="dark pull right"><i class="icon ion-clock"></i>&nbsp;{{activeOffer.time.days}}<sub>days</sub>&nbsp;{{activeOffer.time.hours}}<sub>hours</sub>&nbsp;{{activeOffer.time.minutes}}<sub>minutes</sub>
+        </h4>
+      </a>
+    </ion-list>
+    <br>
+
+    <div class="item item-divider item-icon-right dark">
+      <i class="icon ion-star"></i>
+      Ratings
+      <p ng-show="!ratings.length>0">No ratings yet</p>
+    </div>
+    <div class="item item-avatar" ng-repeat="rateObj in ratings">
+      <img ng-src="{{siteRoot}}/upload/assets/img/subscriber/{{rateObj.rating.subscriber.photo}}">
+      <h2>{{rateObj.rating.subscriber.firstname}}&nbsp;{{rateObj.rating.subscriber.lastname}}</h2>
+      <i class="icon ion-star dark animated bounceIn" ng-repeat="star in rateObj.stars"></i>&nbsp;
+        <span class="pull-right"><p class="h5"><i class="icon ion-ios-calendar"></i> {{rateObj.rating.sentDate| date:
+          'MM/dd/yyyy'}}</p></span>
+    </div>
+    </div>
+
+  </ion-content>
+</ion-view>

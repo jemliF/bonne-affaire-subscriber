@@ -1,0 +1,24 @@
+<ion-view view-title="Stores">
+  <ion-content>
+    <label class="item item-input item-select">
+      <i class="icon ion-android-globe dark"></i>&nbsp;
+      <div class="input-label">
+        Categories
+      </div>
+      <select class="block" ng-model="stores.category" ng-change="categorySelection()"
+              ng-options="category.name for category in categories">
+        <option>All</option>
+      </select>
+    </label>
+    <div class="list">
+
+      <a ng-repeat="localBusiness in localBusinesses" class="item item-avatar" ng-href="#/app/companies/{{localBusiness.id}}">
+        <img ng-src="{{siteRoot}}/upload/assets/img/localbusiness/{{localBusiness.logo}}">
+        <h2>{{localBusiness.label}}</h2>
+        <span class="item-note pull-right">
+        </span>
+        <p>{{localBusiness.description}}</p>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
